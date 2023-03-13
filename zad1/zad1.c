@@ -20,8 +20,8 @@ PTRFUN dogFunctions[2] = { dogGreet, dogMenu };
 PTRFUN catFunctions[2] = { catGreet, catMenu };
 
 struct Animal {
-    char const* name;
     PTRFUN* table;
+    char const* name;
 };
 
 void animalPrintGreeting(struct Animal* animal) {
@@ -58,10 +58,28 @@ struct Animal* createCat(char* pocetnoIme) {
 
 void createNDogs(int n) {
     struct Animal* dogs = malloc(n * sizeof(struct Animal));
-    char int_str[n * 2];
+    int countDigs = 0;
     for (int i = 0; i < n; i++) {
-        sprintf(int_str + i * 2 * sizeof(char), "%d\0", i);
-        dogs[i].name = int_str + i * 2 * sizeof(char);
+        int num = i;
+        do {
+            countDigs++;
+            num /= 10;
+        }
+        while (num != 0);
+        countDigs++;
+    }
+    char int_str[countDigs];
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        int num = i;
+        do {
+            count++;
+            num /= 10;
+        }
+        while (num != 0);
+        count++;
+        sprintf(int_str + count, "%d\0", i);
+        dogs[i].name = int_str + count;
         dogs[i].table = dogFunctions;
     }
     for (int i = 0; i < n; i++) {
@@ -89,8 +107,7 @@ void testAnimals(void) {
 }
 
 int main() {
-
     testAnimals();
-    createNDogs(10);
+    createNDogs(50);
     return 0;
 }
