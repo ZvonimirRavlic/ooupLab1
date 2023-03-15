@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 
 typedef char const *(*PTRFUN)();
 
@@ -49,14 +50,12 @@ void animalPrintMenu(struct Animal *animal) {
 }
 
 void constructDog(struct Dog *dog, char *pocetnoIme) {
-    dog->name = pocetnoIme;
+    dog->name = strdup(pocetnoIme);
     dog->table = dogFunctions;
 }
 
-void constructCat(struct Cat *cat, char *pocetnoIme) {
-    //mozda malloc i tu nisam siguran triba pogledat jos
-    cat->name = pocetnoIme;
-    // i tu
+void constructCat(struct Cat *cat, char const *pocetnoIme) {
+    cat->name = strdup(pocetnoIme);
     cat->table = catFunctions;
 }
 
@@ -105,6 +104,7 @@ void createNDogs(int n) {
 }
 
 void testAnimals(void) {
+
     struct Animal *p1 = (struct Animal *) createDog("Hamlet");
     struct Animal *p2 = (struct Animal *) createCat("Ofelija");
     struct Animal *p3 = (struct Animal *) createDog("Polonije");
@@ -117,6 +117,9 @@ void testAnimals(void) {
     animalPrintMenu(p2);
     animalPrintMenu(p3);
 
+    free((void*)p1->name);
+    free((void*)p2->name);
+    free((void*)p3->name);
     free(p1);
     free(p2);
     free(p3);
@@ -124,6 +127,6 @@ void testAnimals(void) {
 
 int main() {
     testAnimals();
-    createNDogs(50);
+    createNDogs(50 );
     return 0;
 }
