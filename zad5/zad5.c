@@ -19,8 +19,7 @@ int __cdecl prva() {
 }
 
 int __cdecl druga(struct B *b, int x) {
-    int i = b->table[0]() + x;
-    return i;
+    return (**(pfun **) (b))() + x;
 }
 
 struct D {
@@ -35,10 +34,10 @@ struct D *newD() {
     return d;
 }
 
+
 void funkcija(struct B *b) {
-    PTRFUN p = (int (*)(struct B *, int)) (b->table[1]);
-    printf("Prva: %d\n", b->table[0]());
-    printf("Druga: %d\n", p(b, 12));
+    printf("Prva: %d\n", (**(pfun **) (b))());
+    printf("Druga: %d\n",  (**((PTRFUN **) (b)) + 4)(b, 2));
 }
 
 int main() {
