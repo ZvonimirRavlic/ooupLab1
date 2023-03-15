@@ -85,6 +85,7 @@ PTRFUN linearFunctions[2] = {&linearValueAt, &negative_value_at};
 struct Linear *newLinear(int lb, int ub, double a_coef, double b_coef) {
     struct Linear *linear = (struct Linear *) malloc(sizeof(struct Linear));
     linear->table = linearFunctions;
+    //mozda malloc
     linear->lower_bound = lb;
     linear->upper_bound = ub;
     linear->a = a_coef;

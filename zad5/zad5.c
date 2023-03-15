@@ -37,7 +37,7 @@ struct D *newD() {
 
 void funkcija(struct B *b) {
     printf("Prva: %d\n", (**(pfun **) (b))());
-    printf("Druga: %d\n",  (**((PTRFUN **) (b)) + 4)(b, 2));
+    printf("Druga: %d\n",  (**((PTRFUN **) (b)) + 4)(b, 12));
 }
 
 int main() {
