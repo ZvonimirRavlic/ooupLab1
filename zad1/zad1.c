@@ -117,9 +117,9 @@ void testAnimals(void) {
     animalPrintMenu(p2);
     animalPrintMenu(p3);
 
-    free((void*)p1->name);
-    free((void*)p2->name);
-    free((void*)p3->name);
+    free((void *) p1->name);
+    free((void *) p2->name);
+    free((void *) p3->name);
     free(p1);
     free(p2);
     free(p3);
@@ -127,6 +127,6 @@ void testAnimals(void) {
 
 int main() {
     testAnimals();
-    createNDogs(50 );
+    createNDogs(50);
     return 0;
 }
